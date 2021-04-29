@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home" />
+    <item
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:id="@+id/menu_record"
+        android:title="@string/menu_record" />
+    <item
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:id="@+id/menu_statistics"
+        android:title="@string/menu_statistics" />
+    <item
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:id="@+id/menu_account"
+        android:title="@string/menu_account" />
+
+</menu>

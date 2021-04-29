@@ -1,4 +1,4 @@
-package com.k10solutions.learnanything
+package com.codewithk10.learnanything
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
