@@ -23,14 +23,43 @@
         app:backgroundTint="@color/colorWhite"
         app:elevation="0dp"
         app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@color/colorBlack"
         app:itemTextAppearanceActive="@style/AppTheme.TextStyle.Caption"
         app:itemTextAppearanceInactive="@style/AppTheme.TextStyle.Caption"
-        app:itemTextColor="@color/colorBlack"
+        app:itemTextColor="@color/colorTextBlack"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_dashboard" />
+
+    <com.codewithk10.learnanything.view.BottomViewSelectionBar
+        android:id="@+id/bottom_selection_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barColor="@color/colorBlack"
+        app:barHeight="4dp"
+        app:barMode="fixed"
+        app:barCount="5"
+        app:isBarRound="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/colorBlack"
+        app:elevation="0dp"
+        app:fabCustomSize="@dimen/margin_48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fl_container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

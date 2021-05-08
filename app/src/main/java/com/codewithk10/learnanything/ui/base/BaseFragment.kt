@@ -27,6 +27,4 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun setLayout(): Int
     abstract fun init(view: View)
-    abstract fun getInstance(): Fragment
-    abstract fun getInstance(bundle: Bundle): Fragment
 }

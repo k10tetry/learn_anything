@@ -9,20 +9,14 @@ import com.codewithk10.learnanything.ui.dashboard.statistics.StatisticsFragment
 
 class RecordFragment : BaseFragment() {
 
-    private val TAG = "RecordFragment"
+    companion object {
+        const val TAG = "RecordFragment"
+    }
 
     override fun setLayout(): Int {
         return R.layout.fragment_record
     }
 
     override fun init(view: View) {
-    }
-
-    override fun getInstance(): Fragment {
-        return RecordFragment()
-    }
-
-    override fun getInstance(bundle: Bundle): Fragment {
-        return RecordFragment()
     }
 }
