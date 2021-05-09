@@ -39,10 +39,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:barColor="@color/colorBlack"
+        app:barCorners="round"
         app:barHeight="4dp"
         app:barMode="fixed"
-        app:barCount="5"
-        app:isBarRound="true"
+        app:barSweepCount="5"
+        app:enableAnimation="true"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,12 +55,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/colorBlack"
-        app:elevation="0dp"
-        app:fabCustomSize="@dimen/margin_48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="@+id/fl_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_container" />
+        app:layout_constraintTop_toBottomOf="@+id/fl_container"
+        app:rippleColor="@color/colorBlack"
+        app:tint="@color/colorWhite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

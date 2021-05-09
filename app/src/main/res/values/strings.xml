@@ -4,4 +4,7 @@
     <string name="menu_record">Record</string>
     <string name="menu_statistics">Statistics</string>
     <string name="menu_account">Account</string>
+    <string name="menu_back">Back</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_add_skill">Add Skill</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.codewithk10.learnanything.view
 
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -15,16 +16,53 @@ import kotlin.math.min
 
 class BottomViewSelectionBar : View {
 
+    companion object {
+        private const val TAG = "BottomViewSelectionBar"
+        private const val DEFAULT_BAR_COLOR = Color.BLACK
+        private const val DEFAULT_BAR_SWEEP_COUNT = 4
+        private const val DEFAULT_BAR_HEIGHT = 4f
+        private const val DEFAULT_BAR_MAX_HEIGHT = 8f
+    }
+
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private var barColor = Color.BLACK
-    private var barHeight = dpToFloat(4f)
-    private var isBarRound = true
-    private var barCount = 4
-    private var selectedIndex = 0
-    private var barMode = BarMode.FIXED
-    private var startPoint = 0f
-    private var endPoint = 0f
-    private var rectF: RectF? = null
+    var barColor = DEFAULT_BAR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var barHeight = dpToFloat(DEFAULT_BAR_HEIGHT)
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var barCorners = BarCorners.ROUND
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var enableAnimation = true
+    var barSweepCount = DEFAULT_BAR_SWEEP_COUNT
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var currentSelectionIndex = 0f
+    private var newSelectionIndex = 0f
+    private var barCornerRadius = 0f
+    var barMode = BarMode.FIXED
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private lateinit var barRectangle: RectF
+    private lateinit var animator: ValueAnimator
+    var currentIndex = 0
+        get() = currentSelectionIndex.toInt()
+        set(value) {
+            field = value
+            currentSelectionIndex = value.toFloat()
+            invalidate()
+        }
 
     constructor(context: Context) : super(context) {
     }
@@ -43,45 +81,59 @@ class BottomViewSelectionBar : View {
 
         barColor = typeArray.getColor(R.styleable.BottomViewSelectionBar_barColor, Color.BLACK)
         barHeight =
-            typeArray.getDimension(R.styleable.BottomViewSelectionBar_barHeight, dpToFloat(4f))
-        isBarRound = typeArray.getBoolean(R.styleable.BottomViewSelectionBar_isBarRound, true)
-        barMode = BarMode.values()[typeArray.getInt(R.styleable.BottomViewSelectionBar_barMode, 0)]
-        barCount = typeArray.getInt(R.styleable.BottomViewSelectionBar_barCount, 4)
+            typeArray.getDimension(
+                R.styleable.BottomViewSelectionBar_barHeight,
+                dpToFloat(DEFAULT_BAR_HEIGHT)
+            )
+        barCorners = BarCorners.values()[typeArray.getInt(
+            R.styleable.BottomViewSelectionBar_barCorners,
+            0
+        )]
+        barMode = BarMode.values()[typeArray.getInt(
+            R.styleable.BottomViewSelectionBar_barMode,
+            0
+        )]
+        barSweepCount =
+            typeArray.getInt(
+                R.styleable.BottomViewSelectionBar_barSweepCount,
+                DEFAULT_BAR_SWEEP_COUNT
+            )
         typeArray.recycle()
     }
 
     fun setSelectedIndex(index: Int) {
-        if (index in 0 until barCount) {
-            selectedIndex = index
-            invalidate()
+        if (index in 0 until barSweepCount) {
+            if (enableAnimation) {
+                this.newSelectionIndex = index.toFloat()
+                animateBar()
+            } else {
+                invalidate()
+            }
+            this.currentSelectionIndex = index.toFloat()
         }
     }
 
-    fun animate(selectedIndex: Int) {
-        this.selectedIndex = selectedIndex
-        calculateBarSize()
-        val animator = ObjectAnimator.ofFloat(this, "translationX", startPoint, endPoint)
+    private fun animateBar() {
+        animator = ObjectAnimator.ofFloat(currentSelectionIndex, newSelectionIndex)
+        animator.addUpdateListener {
+            currentSelectionIndex = it.animatedValue as Float
+            invalidate()
+        }
         animator.duration = 300L
         animator.interpolator = LinearInterpolator()
         animator.start()
-        startPoint = endPoint
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        calculateBarSize()
+        measureBarRectangle()
         drawBar(canvas)
     }
 
     private fun drawBar(canvas: Canvas?) {
         paint.color = barColor
         paint.style = Paint.Style.FILL
-        if (isBarRound) {
-            val radius = (height / 2).toFloat()
-            canvas?.drawRoundRect(rectF!!, radius, radius, paint)
-        } else {
-            canvas?.drawRect(rectF!!, paint)
-        }
+        canvas?.drawRoundRect(barRectangle, barCornerRadius, barCornerRadius, paint)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -90,7 +142,7 @@ class BottomViewSelectionBar : View {
     }
 
     private fun calculateBarHeight(): Float {
-        return min(barHeight, dpToFloat(8f));
+        return min(barHeight, dpToFloat(DEFAULT_BAR_MAX_HEIGHT))
     }
 
     private fun dpToFloat(dips: Float): Float {
@@ -101,22 +153,29 @@ class BottomViewSelectionBar : View {
         )
     }
 
-    private fun calculateBarSize() {
-        val dividedWidth = (width / barCount)
-        var leftPoint = dividedWidth * selectedIndex
-        var rightPoint = dividedWidth * (selectedIndex + 1)
-
-        this.endPoint = leftPoint.toFloat()
+    private fun measureBarRectangle() {
+        val dividedWidth = (width / barSweepCount)
+        var leftPoint = dividedWidth * currentSelectionIndex
+        var rightPoint = dividedWidth * (currentSelectionIndex + 1f)
 
         if (barMode == BarMode.FIXED) {
             leftPoint += (dividedWidth / 4)
             rightPoint -= (dividedWidth / 4)
         }
-        rectF = RectF(leftPoint.toFloat(), 0f, rightPoint.toFloat(), height.toFloat())
+
+        if (barCorners == BarCorners.ROUND) {
+            barCornerRadius = barHeight / 2
+        }
+
+        barRectangle = RectF(leftPoint, 0f, rightPoint, barHeight)
     }
 
     enum class BarMode {
         FIXED, STRETCH
+    }
+
+    enum class BarCorners {
+        ROUND, SHARP
     }
 
 }

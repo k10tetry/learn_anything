@@ -3,8 +3,12 @@
     <declare-styleable name="BottomViewSelectionBar">
         <attr name="barHeight" format="dimension" />
         <attr name="barColor" format="color" />
-        <attr name="isBarRound" format="boolean" />
-        <attr name="barCount" format="integer" />
+        <attr name="barCorners" format="enum">
+            <enum name="round" value="0" />
+            <enum name="sharp" value="1" />
+        </attr>
+        <attr name="enableAnimation" format="boolean" />
+        <attr name="barSweepCount" format="integer" />
         <attr name="barMode" format="enum">
             <enum name="fixed" value="0" />
             <enum name="stretch" value="1" />

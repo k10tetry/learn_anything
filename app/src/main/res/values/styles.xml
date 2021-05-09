@@ -1,10 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="background">@color/colorBackground</item>
     </style>
 
     <!--Text Styles-->
@@ -59,9 +58,25 @@
 
     <!--EditText Styles-->
     <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
-        <item name="background">@null</item>
-        <item name="fontFamily">@font/poppins</item>
-        <item name="android:textAppearance">@style/AppTheme.TextStyle.SubTitle</item>
+        <item name="android:background">@null</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:layout_marginTop">@dimen/margin_4dp</item>
+        <item name="android:textAppearance">@style/AppTheme.TextStyle.Title</item>
+        <item name="hintTextColor">@color/colorTextDarkGray</item>
     </style>
 
+    <style name="AppTheme.EditText.MultiLine" parent="AppTheme.EditText">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="maxLines">2</item>
+        <item name="android:gravity">start</item>
+        <item name="hintTextColor">@color/colorTextDarkGray</item>
+    </style>
+
+    <!--Material Chips Styles-->
+    <style name="AppTheme.MaterialChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="textEndPadding">@dimen/margin_8dp</item>
+        <item name="textStartPadding">@dimen/margin_8dp</item>
+        <item name="android:textAppearance">@style/AppTheme.TextStyle.SubTitle</item>
+    </style>
 </resources>
