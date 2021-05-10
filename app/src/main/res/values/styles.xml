@@ -17,6 +17,10 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="AppTheme.TextStyle.Title.DarkGray" parent="AppTheme.TextStyle.Title">
+        <item name="android:textColor">@color/colorDarkGray</item>
+    </style>
+
     <style name="AppTheme.TextStyle.SubTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/colorBlack</item>
@@ -68,15 +72,17 @@
 
     <style name="AppTheme.EditText.MultiLine" parent="AppTheme.EditText">
         <item name="android:inputType">textMultiLine</item>
-        <item name="maxLines">2</item>
         <item name="android:gravity">start</item>
         <item name="hintTextColor">@color/colorTextDarkGray</item>
     </style>
 
     <!--Material Chips Styles-->
-    <style name="AppTheme.MaterialChip" parent="Widget.MaterialComponents.Chip.Action">
+    <style name="AppTheme.MaterialChip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="textEndPadding">@dimen/margin_8dp</item>
         <item name="textStartPadding">@dimen/margin_8dp</item>
         <item name="android:textAppearance">@style/AppTheme.TextStyle.SubTitle</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+        <item name="chipBackgroundColor">@color/colorLightGray</item>
+        <item name="chipStrokeColor">@color/color_chips_stroke</item>
     </style>
 </resources>
