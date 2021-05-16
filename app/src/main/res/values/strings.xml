@@ -1,10 +1,27 @@
 <resources>
     <string name="app_name">Learn Anything</string>
+
+    <!--Toolbar Text-->
+    <string name="toolbar_add_skill">Add Skill</string>
+
+    <!--Menu Text-->
     <string name="menu_home">Home</string>
     <string name="menu_record">Record</string>
     <string name="menu_statistics">Statistics</string>
     <string name="menu_account">Account</string>
     <string name="menu_back">Back</string>
     <string name="menu_add">Add</string>
-    <string name="menu_add_skill">Add Skill</string>
+
+    <!--Hint Text-->
+    <string name="hint_learn_programming">Learn Programming</string>
+
+    <!--TextView Text-->
+    <string name="textview_skill_title">Skill Title</string>
+    <string name="textview_note_comment">Note/Comment</string>
+    <string name="textview_reminder">Reminder</string>
+    <string name="textview_sound">Sound</string>
+    <string name="hint_write_a_short_note_comment">Write a short note/comment</string>
+    <string name="textview_target">Target</string>
+    <string name="textview_category">Category</string>
+
 </resources>

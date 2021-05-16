@@ -64,8 +64,7 @@ class BottomViewSelectionBar : View {
             invalidate()
         }
 
-    constructor(context: Context) : super(context) {
-    }
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attributes: AttributeSet) : super(context, attributes) {
         initAttributes(attributes)

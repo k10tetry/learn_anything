@@ -18,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class DashboardActivity : BaseActivity() {
 
     companion object {
-        const val TAG = "DashboardActivity"
         private const val REQUEST_CODE_CREATE_SKILL = 101
     }
 

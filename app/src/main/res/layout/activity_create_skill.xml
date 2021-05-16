@@ -5,23 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:liftOnScroll="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/m_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:menu="@menu/menu_dashboard_toolbar"
-            app:navigationIcon="@drawable/ic_back_arrow"
-            app:title="@string/menu_add_skill"
-            app:titleTextAppearance="@style/AppTheme.TextStyle.Title" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/toolbar_custom" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,151 +14,166 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_24dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Skill Title" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                style="@style/AppTheme.EditText"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Learn JavaScript"
-                android:textColorHint="@color/colorTextDarkGray" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_24dp"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:layout_marginRight="@dimen/margin_24dp"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="Note/Comment" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                style="@style/AppTheme.EditText.MultiLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="JavaScript is visible almost"
-                android:textColorHint="@color/colorTextDarkGray" />
-
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="Target" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp">
-
-                <com.google.android.material.chip.ChipGroup
+                <TextView
+                    style="@style/AppTheme.TextStyle.SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipSpacingHorizontal="@dimen/margin_12dp"
-                    app:singleLine="true"
-                    app:singleSelection="true">
+                    android:text="@string/textview_skill_title" />
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/AppTheme.MaterialChip"
+                <androidx.appcompat.widget.AppCompatEditText
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_learn_programming"
+                    android:textColorHint="@color/colorTextLightGray" />
+
+                <TextView
+                    style="@style/AppTheme.TextStyle.SubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:text="@string/textview_note_comment" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    style="@style/AppTheme.EditText.MultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_write_a_short_note_comment"
+                    android:textColorHint="@color/colorTextLightGray" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:background="@color/colorLightGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_notifications" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_weight="1"
+                        android:text="@string/textview_reminder" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7:00 PM" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:background="@color/colorLightGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_sound" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_weight="1"
+                        android:text="@string/textview_sound" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Default" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:background="@color/colorLightGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_target" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_weight="1"
+                        android:text="@string/textview_target" />
+
+                    <TextView
+                        style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="21 hrs" />
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/AppTheme.MaterialChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30 hrs" />
+                </LinearLayout>
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/AppTheme.MaterialChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="42 hrs" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/AppTheme.MaterialChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="60 hrs" />
-
-                </com.google.android.material.chip.ChipGroup>
-
-            </HorizontalScrollView>
-
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="Reminder" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp"
-                android:orientation="horizontal">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:background="@color/colorLightGray" />
 
                 <TextView
-                    style="@style/AppTheme.TextStyle.Title.DarkGray"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Remind me at" />
-
-                <TextView
-                    style="@style/AppTheme.TextStyle.Title.DarkGray"
+                    style="@style/AppTheme.TextStyle.SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7:00 PM" />
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:text="@string/textview_category" />
 
             </LinearLayout>
-
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="Sound" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/AppTheme.TextStyle.Title.DarkGray"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Notification Sound" />
-
-                <TextView
-                    style="@style/AppTheme.TextStyle.Title.DarkGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Default" />
-
-            </LinearLayout>
-
-            <TextView
-                style="@style/AppTheme.TextStyle.SubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="Category" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_create_skill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp" />
+                android:layout_marginTop="@dimen/margin_16dp" />
 
         </LinearLayout>
 
