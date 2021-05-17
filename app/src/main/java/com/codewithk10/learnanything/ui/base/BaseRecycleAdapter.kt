@@ -23,7 +23,7 @@ abstract class BaseRecycleAdapter<T>(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        initView(holder.itemView, holder.adapterPosition)
+        initView(holder.itemView)
         initDataItem(dataItemList[position])
     }
 

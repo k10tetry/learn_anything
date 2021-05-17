@@ -32,6 +32,7 @@
                     android:text="@string/textview_skill_title" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_skill_title"
                     style="@style/AppTheme.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
                     android:text="@string/textview_note_comment" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_skill_note"
                     style="@style/AppTheme.EditText.MultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,6 +81,7 @@
                         android:text="@string/textview_reminder" />
 
                     <TextView
+                        android:id="@+id/tv_skill_reminder"
                         style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,6 +116,7 @@
                         android:text="@string/textview_sound" />
 
                     <TextView
+                        android:id="@+id/tv_skill_sound"
                         style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,6 +151,7 @@
                         android:text="@string/textview_target" />
 
                     <TextView
+                        android:id="@+id/tv_skill_target"
                         style="@style/AppTheme.TextStyle.SubTitle.DarkGray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
