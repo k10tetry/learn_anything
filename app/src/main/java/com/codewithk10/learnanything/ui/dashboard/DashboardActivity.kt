@@ -42,7 +42,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun initListener() {
-        bottomNavigationView.setOnNavigationItemSelectedListener {
+        bottomNavigationView.setOnItemSelectedListener {
             onBottomNavigation(it)
             true
         }
