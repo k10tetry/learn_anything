@@ -3,7 +3,6 @@ package com.codewithk10.learnanything.ui.skill
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -127,7 +126,7 @@ class CreateSkillActivity : BaseActivity() {
 
         val skillTitle = editTextTitle.text.toString().trim()
 
-        if (TextUtils.isEmpty(skillTitle)) {
+        if (skillTitle.isEmpty()) {
             toast("Skill title required!")
             return true
         }
