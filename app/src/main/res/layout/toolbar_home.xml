@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorBackground"
+            android:paddingStart="@dimen/margin_16dp"
+            android:paddingEnd="@dimen/margin_16dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:titleTextAppearance="@style/AppTheme.TextStyle.Title">
+
+            <ImageView
+                android:id="@+id/iv_toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/shape_white_round"
+                android:padding="@dimen/margin_8dp"
+                android:src="@drawable/ic_back_arrow" />
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                style="@style/AppTheme.TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:text="Hi, Max" />
+
+            <ImageView
+                android:id="@+id/iv_toolbar_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/shape_white_round"
+                android:padding="@dimen/margin_8dp"
+                android:src="@drawable/ic_notification" />
+
+            <ImageView
+                android:id="@+id/iv_toolbar_premium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:background="@drawable/shape_white_round"
+                android:padding="@dimen/margin_8dp"
+                android:src="@drawable/ic_premium" />
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+</merge>

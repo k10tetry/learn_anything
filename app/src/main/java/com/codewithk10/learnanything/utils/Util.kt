@@ -5,20 +5,16 @@ import android.util.TypedValue
 
 object Util {
 
-    fun dpToPx(context: Context, dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            context.resources.displayMetrics
-        )
-    }
+    fun dpToPx(context: Context, dp: Float): Float = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        context.resources.displayMetrics
+    )
 
-    fun pxToDp(context: Context, pixel: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_PX,
-            pixel,
-            context.resources.displayMetrics
-        )
-    }
+    fun pxToDp(context: Context, pixel: Float): Float = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_PX,
+        pixel,
+        context.resources.displayMetrics
+    )
 
 }

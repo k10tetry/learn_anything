@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.ui.base.BaseRecycleAdapter
 
-class SkillCategoryAdapter(private val context: Context) :
+class SkillCategoryAdapter(context: Context) :
     BaseRecycleAdapter<CategoryData>(context) {
 
     private lateinit var textViewCategory: TextView
