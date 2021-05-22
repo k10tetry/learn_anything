@@ -20,9 +20,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_24dp"
-                android:layout_marginTop="@dimen/margin_24dp"
-                android:layout_marginRight="@dimen/margin_24dp"
+                android:layout_marginLeft="@dimen/_16"
+                android:layout_marginTop="@dimen/_16"
+                android:layout_marginRight="@dimen/_16"
                 android:orientation="vertical">
 
                 <TextView
@@ -43,7 +43,7 @@
                     style="@style/AppTheme.TextStyle.SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:text="@string/textview_note_comment" />
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -57,13 +57,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:background="@color/colorLightGray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -76,7 +76,7 @@
                         style="@style/AppTheme.TextStyle.SubTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_marginStart="@dimen/_8"
                         android:layout_weight="1"
                         android:text="@string/textview_reminder" />
 
@@ -92,13 +92,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:background="@color/colorLightGray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -111,7 +111,7 @@
                         style="@style/AppTheme.TextStyle.SubTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_marginStart="@dimen/_8"
                         android:layout_weight="1"
                         android:text="@string/textview_sound" />
 
@@ -127,13 +127,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:background="@color/colorLightGray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -146,7 +146,7 @@
                         style="@style/AppTheme.TextStyle.SubTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_marginStart="@dimen/_8"
                         android:layout_weight="1"
                         android:text="@string/textview_target" />
 
@@ -162,14 +162,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:background="@color/colorLightGray" />
 
                 <TextView
                     style="@style/AppTheme.TextStyle.SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/_16"
                     android:text="@string/textview_category" />
 
             </LinearLayout>
@@ -178,7 +178,7 @@
                 android:id="@+id/rv_create_skill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_16dp" />
+                android:layout_marginTop="@dimen/_16" />
 
         </LinearLayout>
 

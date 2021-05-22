@@ -17,12 +17,12 @@ class SkillCategoryItemDecorator(private val context: Context) : RecyclerView.It
         super.getItemOffsets(outRect, view, parent, state)
 
         val positionLeft = when (parent.getChildAdapterPosition(view)) {
-            0 -> 24f
+            0 -> 16f
             else -> 12f
         }
 
         val positionRight = when (parent.getChildAdapterPosition(view)) {
-            parent.adapter?.itemCount?.minus(1) -> 24f
+            parent.adapter?.itemCount?.minus(1) -> 16f
             else -> 0f
         }
 

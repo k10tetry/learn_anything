@@ -81,8 +81,8 @@
 
     <!--Material Chips Styles-->
     <style name="AppTheme.MaterialChip" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="textEndPadding">@dimen/margin_8dp</item>
-        <item name="textStartPadding">@dimen/margin_8dp</item>
+        <item name="textEndPadding">@dimen/_8</item>
+        <item name="textStartPadding">@dimen/_8</item>
         <item name="android:textAppearance">@style/AppTheme.TextStyle.SubTitle</item>
         <item name="chipStrokeWidth">1.5dp</item>
         <item name="chipBackgroundColor">@color/colorLightGray</item>

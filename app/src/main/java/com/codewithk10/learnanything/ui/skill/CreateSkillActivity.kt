@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.data.db.AppDatabase
+import com.codewithk10.learnanything.data.db.entity.Skill
 import com.codewithk10.learnanything.ui.base.BaseActivity
 import com.codewithk10.learnanything.ui.skill.adapter.CategoryData
 import com.codewithk10.learnanything.ui.skill.adapter.SkillCategoryAdapter
@@ -16,6 +18,8 @@ import com.codewithk10.learnanything.utils.itemdecorator.SkillCategoryItemDecora
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class CreateSkillActivity : BaseActivity() {
 
@@ -119,7 +123,19 @@ class CreateSkillActivity : BaseActivity() {
             return
         }
 
+        val skilTitle = editTextTitle.text.toString().trim()
+        val skillNote = editTextNote.text.toString().trim()
 
+        val skill = Skill(skilTitle, skillNote)
+        AppDatabase.getDatabase(this).skillDao().addSkill(skill)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                setResult(RESULT_OK)
+                finish()
+            }, {
+                log(it.message.toString())
+            })
     }
 
     private fun isInvalid(): Boolean {

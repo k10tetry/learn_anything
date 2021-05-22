@@ -17,12 +17,12 @@ class HomeSkillItemDecorator(private val context: Context) : RecyclerView.ItemDe
         super.getItemOffsets(outRect, view, parent, state)
 
         val bottom = when (parent.getChildAdapterPosition(view)) {
-            parent.adapter?.itemCount?.minus(1) -> 24f
+            parent.adapter?.itemCount?.minus(1) -> 16f
             else -> 0f
         }
 
-        outRect.left = Util.dpToPx(context, 24f).toInt()
-        outRect.right = Util.dpToPx(context, 24f).toInt()
+        outRect.left = Util.dpToPx(context, 16f).toInt()
+        outRect.right = Util.dpToPx(context, 16f).toInt()
         outRect.top = Util.dpToPx(context, 16f).toInt()
         outRect.bottom = Util.dpToPx(context, bottom).toInt()
     }
