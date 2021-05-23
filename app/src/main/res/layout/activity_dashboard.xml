@@ -39,8 +39,8 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <com.codewithk10.learnanything.view.BottomViewSelectionBar
-        android:id="@+id/bottom_selection_bar"
+    <com.codewithk10.bottomnavigationindicator.BottomNavigationIndicator
+        android:id="@+id/bottom_navigation_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:barColor="@color/colorBlack"

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.codewithk10.bottomnavigationindicator.BottomNavigationIndicator
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.ui.base.BaseActivity
 import com.codewithk10.learnanything.ui.dashboard.account.AccountFragment
@@ -11,7 +12,6 @@ import com.codewithk10.learnanything.ui.dashboard.home.HomeFragment
 import com.codewithk10.learnanything.ui.dashboard.record.RecordFragment
 import com.codewithk10.learnanything.ui.dashboard.statistics.StatisticsFragment
 import com.codewithk10.learnanything.ui.skill.CreateSkillActivity
-import com.codewithk10.learnanything.view.BottomViewSelectionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -22,7 +22,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var bottomViewSelectionBar: BottomViewSelectionBar
+    private lateinit var bottomViewSelectionBar: BottomNavigationIndicator
     private lateinit var floatingActionButton: FloatingActionButton
 
     override fun setLayout(): Int {
@@ -36,7 +36,7 @@ class DashboardActivity : BaseActivity() {
 
     private fun initView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomViewSelectionBar = findViewById(R.id.bottom_selection_bar)
+        bottomViewSelectionBar = findViewById(R.id.bottom_navigation_indicator)
         floatingActionButton = findViewById(R.id.fab_dashboard)
         initListener()
     }
