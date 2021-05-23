@@ -23,6 +23,7 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(view)
+        setUp()
     }
 
     override fun onAttach(context: Context) {
@@ -43,4 +44,5 @@ abstract class BaseFragment : Fragment() {
     @LayoutRes
     abstract fun setLayout(): Int
     abstract fun init(view: View)
+    abstract fun setUp()
 }

@@ -1,8 +1,9 @@
-package com.codewithk10.learnanything.ui.skill.adapter
+package com.codewithk10.learnanything.ui.skill.data
 
+import androidx.annotation.DrawableRes
 import com.codewithk10.learnanything.R
 
-enum class CategoryData(val categoryTitle: String, val categoryImage: Int) {
+enum class CategoryData(val categoryTitle: String, @DrawableRes val categoryImage: Int) {
     CAREER("Career", R.drawable.unsplash_1),
     FINANCE("Finance", R.drawable.unsplash_2),
     FUTURE("Future", R.drawable.unsplash_3),

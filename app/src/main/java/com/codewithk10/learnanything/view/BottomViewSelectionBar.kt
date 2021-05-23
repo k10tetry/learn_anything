@@ -40,7 +40,7 @@ class BottomViewSelectionBar : View {
             field = value
             invalidate()
         }
-    private var enableAnimation = true
+    var enableAnimation = true
     var barSweepCount = DEFAULT_BAR_SWEEP_COUNT
         set(value) {
             field = value

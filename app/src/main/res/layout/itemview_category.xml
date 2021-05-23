@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/tv_category_title"
-            style="@style/AppTheme.TextStyle.Body.DarkGray"
+            style="@style/AppTheme.TextStyle.Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -47,6 +47,7 @@
         android:layout_marginBottom="@dimen/_16"
         android:background="@drawable/shape_white_round"
         android:src="@drawable/ic_check"
-        android:tint="@color/colorTextDarkGray" />
+        android:visibility="gone"
+        app:tint="@color/colorBlack" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

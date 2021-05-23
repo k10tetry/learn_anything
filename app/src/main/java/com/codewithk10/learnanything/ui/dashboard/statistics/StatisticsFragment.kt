@@ -28,4 +28,8 @@ class StatisticsFragment : BaseFragment() {
 
     override fun init(view: View) {
     }
+
+    override fun setUp() {
+
+    }
 }

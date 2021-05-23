@@ -30,4 +30,8 @@ class RecordFragment : BaseFragment() {
 
     override fun init(view: View) {
     }
+
+    override fun setUp() {
+
+    }
 }

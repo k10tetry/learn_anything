@@ -3,7 +3,7 @@ package com.codewithk10.learnanything.utils
 import android.content.Context
 import android.util.TypedValue
 
-object Util {
+object AppUtil {
 
     fun dpToPx(context: Context, dp: Float): Float = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,

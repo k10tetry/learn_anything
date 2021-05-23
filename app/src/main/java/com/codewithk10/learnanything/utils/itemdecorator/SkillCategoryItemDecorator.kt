@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.codewithk10.learnanything.utils.Util
+import com.codewithk10.learnanything.utils.AppUtil
 
 class SkillCategoryItemDecorator(private val context: Context) : RecyclerView.ItemDecoration() {
 
@@ -26,7 +26,7 @@ class SkillCategoryItemDecorator(private val context: Context) : RecyclerView.It
             else -> 0f
         }
 
-        outRect.left = Util.dpToPx(context, positionLeft).toInt()
-        outRect.right = Util.dpToPx(context, positionRight).toInt()
+        outRect.left = AppUtil.dpToPx(context, positionLeft).toInt()
+        outRect.right = AppUtil.dpToPx(context, positionRight).toInt()
     }
 }

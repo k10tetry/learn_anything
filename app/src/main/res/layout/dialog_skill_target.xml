@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_round_rectangle_16dp"
+    android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/unsplash_1" />
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_12"
+        android:paddingBottom="@dimen/_12"
+        android:paddingStart="@dimen/_16"
+        android:paddingEnd="@dimen/_16">
+
+        <TextView
+            style="@style/AppTheme.TextStyle.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Target" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLightGray" />
+
+    <LinearLayout
+        android:padding="@dimen/_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="160dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_skill_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </LinearLayout>

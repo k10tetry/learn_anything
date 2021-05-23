@@ -44,26 +44,33 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun init(view: View) {
-        initView(view)
-        setUpListeners()
-        setUpAdapter()
-        AppDatabase.getDatabase(requireContext()).skillDao().getAllSkills()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                homeSkillAdapter.dataItemList = ArrayList(it)
-            }
-    }
-
-    private fun initView(view: View) {
         recycleView = view.findViewById(R.id.rv_home_skill)
         materialToolbar = view.findViewById(R.id.toolbar)
         textViewToolbarTitle = view.findViewById(R.id.tv_toolbar_title)
         imageViewPremium = view.findViewById(R.id.iv_toolbar_premium)
         imageViewNotification = view.findViewById(R.id.iv_toolbar_notification)
 
-        setUpToolbar()
         setUpListeners()
+    }
+
+    override fun setUp() {
+        setUpToolbar()
+        setUpAdapter()
+        loadSkills()
+    }
+
+    private fun loadSkills() {
+        AppDatabase.getDatabase(requireContext()).skillDao().getAllSkills()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    homeSkillAdapter.dataItemList = ArrayList(it)
+                },
+                {
+                    log(it.message.toString())
+                }
+            )
     }
 
     private fun setUpAdapter() {
@@ -74,16 +81,15 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setUpListeners() {
-
-    }
-
-    private fun setUpToolbar() {
-        textViewToolbarTitle.text = "Hi, Ketan"
-
         imageViewPremium.setOnClickListener {
         }
 
         imageViewNotification.setOnClickListener {
         }
+    }
+
+    private fun setUpToolbar() {
+        // TODO: 23/5/21 Set app user name
+        textViewToolbarTitle.text = "Hi, Ketan"
     }
 }

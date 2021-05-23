@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.ui.base.BaseRecycleAdapter
+import com.codewithk10.learnanything.ui.skill.data.CategoryData
 
 class SkillCategoryAdapter(context: Context) :
     BaseRecycleAdapter<CategoryData>(context) {
@@ -14,7 +15,8 @@ class SkillCategoryAdapter(context: Context) :
     private lateinit var imageViewCategory: ImageView
     private lateinit var imageViewSelectedCategory: ImageView
     private lateinit var itemview: View
-    var selectedCategory = CategoryData.CAREER
+    var selectedCategory: CategoryData? = null
+    var listener: OnCategorySelectedListener? = null
 
     override fun setItemView(): Int {
         return R.layout.itemview_category
@@ -30,13 +32,19 @@ class SkillCategoryAdapter(context: Context) :
     override fun initDataItem(dataItem: CategoryData) {
         textViewCategory.text = dataItem.categoryTitle
         imageViewCategory.setImageResource(dataItem.categoryImage)
-        imageViewSelectedCategory.visibility =
-            if (selectedCategory == dataItem) View.VISIBLE else View.GONE
+        if (selectedCategory != null)
+            imageViewSelectedCategory.visibility =
+                if (selectedCategory == dataItem) View.VISIBLE else View.GONE
 
         itemview.setOnClickListener {
             selectedCategory = dataItem
+            listener?.onSelectCategory(dataItem)
             notifyDataSetChanged()
         }
+    }
+
+    interface OnCategorySelectedListener {
+        fun onSelectCategory(dataItem: CategoryData)
     }
 
 }

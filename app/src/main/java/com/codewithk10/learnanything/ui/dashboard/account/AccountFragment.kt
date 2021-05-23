@@ -28,4 +28,8 @@ class AccountFragment : BaseFragment() {
 
     override fun init(view: View) {
     }
+
+    override fun setUp() {
+
+    }
 }
