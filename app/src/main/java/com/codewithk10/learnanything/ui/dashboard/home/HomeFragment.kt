@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment() {
                     homeSkillAdapter.dataItemList = ArrayList(it)
                 },
                 {
-                    log(it.message.toString())
+                    log(it.message.toString() + "home")
                 }
             )
     }

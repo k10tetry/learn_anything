@@ -1,7 +1,8 @@
 package com.codewithk10.learnanything.ui.dashboard
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.codewithk10.bottomnavigationindicator.BottomNavigationIndicator
@@ -18,7 +19,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class DashboardActivity : BaseActivity() {
 
     companion object {
-        private const val REQUEST_CODE_CREATE_SKILL = 101
+
+        fun getInstance(context: Context): Intent {
+            return Intent(context, DashboardActivity::class.java)
+        }
+
+        fun getInstance(context: Context, bundle: Bundle): Intent {
+            val intent = getInstance(context)
+            intent.putExtras(bundle)
+            return intent
+        }
     }
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -26,12 +36,12 @@ class DashboardActivity : BaseActivity() {
     private lateinit var floatingActionButton: FloatingActionButton
 
     override fun setLayout(): Int {
-        return R.layout.activity_dashboard;
+        return R.layout.activity_dashboard
     }
 
     override fun init() {
         initView()
-        openFragment(HomeFragment.getInstance(), HomeFragment.TAG);
+        openFragment(HomeFragment.getInstance(), HomeFragment.TAG)
     }
 
     private fun initView() {
@@ -72,26 +82,15 @@ class DashboardActivity : BaseActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_CODE_CREATE_SKILL -> {
-                    // TODO: 9/5/21 Refresh skill listings
-                }
-            }
-        }
-    }
-
     private fun openCreateSkillActivity() {
-        startActivityForResult(CreateSkillActivity.getInstance(this), REQUEST_CODE_CREATE_SKILL)
+        startActivity(CreateSkillActivity.getInstance(this))
     }
 
     private fun openFragment(fragment: Fragment, tag: String) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fl_container, fragment, tag)
-        fragmentTransaction.disallowAddToBackStack()
-        fragmentTransaction.commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_container, fragment, tag)
+            disallowAddToBackStack()
+            commit()
+        }
     }
 }

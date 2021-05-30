@@ -5,12 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.codewithk10.learnanything.data.db.dao.SkillDao
+import com.codewithk10.learnanything.data.db.converter.AppNotifyConvertor
 import com.codewithk10.learnanything.data.db.converter.LocalTimeConverter
+import com.codewithk10.learnanything.data.db.dao.SkillDao
 import com.codewithk10.learnanything.data.db.entity.Skill
 
 @Database(entities = [Skill::class], version = 1, exportSchema = false)
-@TypeConverters(LocalTimeConverter::class)
+@TypeConverters(LocalTimeConverter::class, AppNotifyConvertor::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun skillDao(): SkillDao
 

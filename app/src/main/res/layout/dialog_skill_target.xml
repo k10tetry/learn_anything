@@ -8,10 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_12"
-        android:paddingBottom="@dimen/_12"
         android:paddingStart="@dimen/_16"
-        android:paddingEnd="@dimen/_16">
+        android:paddingTop="@dimen/_12"
+        android:paddingEnd="@dimen/_16"
+        android:paddingBottom="@dimen/_12">
 
         <TextView
             style="@style/AppTheme.TextStyle.Title"
@@ -27,10 +27,10 @@
         android:background="@color/colorLightGray" />
 
     <LinearLayout
-        android:padding="@dimen/_12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="160dp">
+        android:minHeight="160dp"
+        android:padding="@dimen/_12">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_skill_target"

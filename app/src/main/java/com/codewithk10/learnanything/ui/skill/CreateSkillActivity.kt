@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codewithk10.learnanything.R
@@ -18,6 +19,8 @@ import com.codewithk10.learnanything.ui.skill.adapter.SkillCategoryAdapter
 import com.codewithk10.learnanything.ui.skill.data.CategoryData
 import com.codewithk10.learnanything.ui.skill.data.TargetData
 import com.codewithk10.learnanything.utils.itemdecorator.SkillCategoryItemDecorator
+import com.codewithk10.learnanything.utils.notification.AppAlarmUtil
+import com.codewithk10.learnanything.utils.notification.AppNotify
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -30,7 +33,6 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
 
     companion object {
 
-        private const val REQUEST_NOTIFICATION_SOUND = 1001
         private const val DEFAULT_NOTIFICATION_HOUR = 19
         private const val DEFAULT_NOTIFICATION_MINUTE = 0
 
@@ -57,11 +59,11 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     private lateinit var editTextTitle: EditText
     private lateinit var editTextNote: EditText
 
-    private var notificationSoundTitle: String? = null
-    private var notificationSoundUri: Uri? = null
+    private lateinit var notificationSoundTitle: String
+    private lateinit var notificationSoundUri: Uri
+    private lateinit var selectedNotificationTime: LocalTime
     private var selectedCategory: CategoryData = CategoryData.CAREER
     private var selectedTarget: TargetData = TargetData.TWENTY_ONE
-    private var selectedNotificationTime: LocalTime? = null
 
     override fun setLayout(): Int {
         return R.layout.activity_create_skill
@@ -147,17 +149,18 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     }
 
     private fun chooseSkillTarget() {
-        val targetDialog = SkillTargetDialog(selectedTarget)
-        targetDialog.show(supportFragmentManager, SkillTargetDialog.TAG)
+        SkillTargetDialog(selectedTarget).apply {
+            show(supportFragmentManager, SkillTargetDialog.TAG)
+        }
     }
 
     private fun chooseNotificationReminder() {
-        val materialTimePicker =
-            MaterialTimePicker.Builder()
-                .setHour(selectedNotificationTime!!.hourOfDay)
-                .setMinute(selectedNotificationTime!!.minuteOfHour)
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setTitleText("Set Reminder").build()
+        val materialTimePicker = MaterialTimePicker.Builder().apply {
+            setHour(selectedNotificationTime.hourOfDay)
+            setMinute(selectedNotificationTime.minuteOfHour)
+            setTimeFormat(TimeFormat.CLOCK_12H)
+            setTitleText("Set Reminder")
+        }.build()
 
         materialTimePicker.addOnPositiveButtonClickListener {
             selectedNotificationTime = LocalTime(materialTimePicker.hour, materialTimePicker.minute)
@@ -171,7 +174,6 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
         textViewToolbarTitle.text = getString(R.string.toolbar_add_skill)
 
         imageViewBack.setOnClickListener {
-            setResult(RESULT_CANCELED)
             onBackPressed()
         }
 
@@ -186,24 +188,38 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
             return
         }
 
-        val skilTitle = editTextTitle.text.toString().trim()
+        val skillTitle = editTextTitle.text.toString().trim()
         val skillNote = editTextNote.text.toString().trim()
+
+        val skillNotify = AppNotify(
+            1,
+            skillTitle,
+            skillNote,
+            selectedNotificationTime.toDateTimeToday().millis,
+            notificationSoundTitle,
+            notificationSoundUri.toString()
+        )
 
         val skillObject =
             Skill(
-                skilTitle,
+                skillTitle,
                 skillNote,
-                selectedNotificationTime!!,
-                notificationSoundTitle,
-                notificationSoundUri.toString(),
+                skillNotify,
                 selectedTarget,
                 selectedCategory
             )
+
+        addSkillToRoom(skillObject)
+        AppAlarmUtil(this).apply {
+            createScheduledAlarm(skillNotify)
+        }
+    }
+
+    private fun addSkillToRoom(skillObject: Skill) {
         AppDatabase.getDatabase(this).skillDao().addSkill(skillObject)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                setResult(RESULT_OK)
                 finish()
             }, {
                 log(it.message.toString())
@@ -229,29 +245,30 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     }
 
     private fun chooseNotificationSound() {
-        val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION)
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Sound")
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false)
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, notificationSoundUri)
-        startActivityForResult(intent, REQUEST_NOTIFICATION_SOUND)
+        val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
+            putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION)
+            putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Sound")
+            putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false)
+            putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, notificationSoundUri)
+        }
+        notificationSoundResult.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                REQUEST_NOTIFICATION_SOUND -> {
-                    val uri =
-                        data?.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                    notificationSoundUri = uri
-                    val notificationTone = RingtoneManager.getRingtone(this, uri);
+    private val notificationSoundResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val uri =
+                    result.data?.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+                uri?.let {
+                    notificationSoundUri = it
+                    val notificationTone = RingtoneManager.getRingtone(this, uri)
                     notificationSoundTitle = notificationTone.getTitle(this)
                     setNotificationSound()
                 }
             }
         }
-    }
 
     internal fun onTargetSelected(targetData: TargetData) {
         selectedTarget = targetData

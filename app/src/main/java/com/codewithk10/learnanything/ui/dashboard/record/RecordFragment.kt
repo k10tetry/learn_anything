@@ -5,8 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.ui.base.BaseFragment
-import com.codewithk10.learnanything.ui.dashboard.home.HomeFragment
-import com.codewithk10.learnanything.ui.dashboard.statistics.StatisticsFragment
 
 class RecordFragment : BaseFragment() {
 
