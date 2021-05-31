@@ -19,7 +19,7 @@ import com.codewithk10.learnanything.ui.skill.adapter.SkillCategoryAdapter
 import com.codewithk10.learnanything.ui.skill.data.CategoryData
 import com.codewithk10.learnanything.ui.skill.data.TargetData
 import com.codewithk10.learnanything.utils.itemdecorator.SkillCategoryItemDecorator
-import com.codewithk10.learnanything.utils.notification.AppAlarmUtil
+import com.codewithk10.learnanything.utils.notification.AppAlarmService
 import com.codewithk10.learnanything.utils.notification.AppNotify
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -192,7 +192,7 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
         val skillNote = editTextNote.text.toString().trim()
 
         val skillNotify = AppNotify(
-            1,
+            1, // TODO: 31/05/21 Notificatio id
             skillTitle,
             skillNote,
             selectedNotificationTime.toDateTimeToday().millis,
@@ -210,7 +210,7 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
             )
 
         addSkillToRoom(skillObject)
-        AppAlarmUtil(this).apply {
+        AppAlarmService(this).apply {
             createScheduledAlarm(skillNotify)
         }
     }

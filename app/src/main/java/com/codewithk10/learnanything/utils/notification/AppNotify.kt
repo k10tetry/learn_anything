@@ -1,7 +1,9 @@
 package com.codewithk10.learnanything.utils.notification
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class AppNotify(
     val notificationId: Int,
     val notificationTitle: String,
@@ -9,4 +11,4 @@ data class AppNotify(
     val notificationReminder: Long,
     val notificationSound: String,
     val notificationSoundUri: String
-) : Serializable
+) : Parcelable
