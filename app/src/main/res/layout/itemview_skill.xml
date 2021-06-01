@@ -21,7 +21,6 @@
             style="@style/AppTheme.TextStyle.Caption.DarkGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Career"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +58,6 @@
         android:layout_marginEnd="@dimen/_16"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="This is the main title"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -71,7 +69,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="A short note about skill"
         app:layout_constraintEnd_toEndOf="@+id/tv_skill_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_skill_title" />

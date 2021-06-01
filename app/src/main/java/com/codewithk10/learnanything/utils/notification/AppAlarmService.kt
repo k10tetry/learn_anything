@@ -31,7 +31,7 @@ class AppAlarmService(private val context: Context) {
             putParcelable(AlarmReceiver.EXTRA_NOTIFY_DATA, notify)
         }
         val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra(AlarmReceiver.EXTRA_NOTIFY_DATA, bundle)
+            putExtra(AlarmReceiver.EXTRA_NOTIFY_BUNDLE, bundle)
         }
         return PendingIntent.getBroadcast(
             context,

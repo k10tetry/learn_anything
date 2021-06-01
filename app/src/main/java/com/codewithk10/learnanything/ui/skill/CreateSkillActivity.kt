@@ -26,6 +26,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import org.joda.time.DateTime
 import org.joda.time.LocalTime
 import org.joda.time.format.DateTimeFormat
 
@@ -155,6 +156,11 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     }
 
     private fun chooseNotificationReminder() {
+
+        if (supportFragmentManager.findFragmentByTag("MaterialTimePicker") != null) {
+            return
+        }
+
         val materialTimePicker = MaterialTimePicker.Builder().apply {
             setHour(selectedNotificationTime.hourOfDay)
             setMinute(selectedNotificationTime.minuteOfHour)
@@ -192,10 +198,10 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
         val skillNote = editTextNote.text.toString().trim()
 
         val skillNotify = AppNotify(
-            1, // TODO: 31/05/21 Notificatio id
+            LocalTime.now().millisOfDay,
             skillTitle,
             skillNote,
-            selectedNotificationTime.toDateTimeToday().millis,
+            getNotificationReminderTime(),
             notificationSoundTitle,
             notificationSoundUri.toString()
         )
@@ -206,13 +212,22 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
                 skillNote,
                 skillNotify,
                 selectedTarget,
-                selectedCategory
+                selectedCategory,
+                DateTime.now().millis
             )
 
         addSkillToRoom(skillObject)
         AppAlarmService(this).apply {
             createScheduledAlarm(skillNotify)
         }
+    }
+
+    private fun getNotificationReminderTime(): Long {
+        var notificationTime = selectedNotificationTime.toDateTimeToday().millis
+        if (selectedNotificationTime.isBefore(LocalTime.now())) {
+            notificationTime = selectedNotificationTime.toDateTimeToday().plusDays(1).millis
+        }
+        return notificationTime
     }
 
     private fun addSkillToRoom(skillObject: Skill) {

@@ -14,6 +14,7 @@ data class Skill(
     @ColumnInfo(name = "skill_notification") val skillNotification: AppNotify,
     @ColumnInfo(name = "skill_target") val skillTarget: TargetData,
     @ColumnInfo(name = "skill_category") val skillCategory: CategoryData,
+    @ColumnInfo(name = "skill_create_date") val skillCreateDate: Long,
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
