@@ -12,12 +12,15 @@ class HomeSkillAdapter(context: Context) : BaseRecycleAdapter<Skill>(context) {
     private lateinit var textViewSkillTitle: TextView
     private lateinit var textViewSkillNote: TextView
     private lateinit var textViewSkillCategory: TextView
+    private lateinit var itemview: View
+    var listener: OnSkillClickListener? = null
 
     override fun setItemView(): Int {
         return R.layout.itemview_skill
     }
 
     override fun initView(view: View) {
+        itemview = view
         textViewSkillTitle = view.findViewById(R.id.tv_skill_title)
         textViewSkillNote = view.findViewById(R.id.tv_skill_note)
         textViewSkillCategory = view.findViewById(R.id.tv_skill_category)
@@ -27,5 +30,13 @@ class HomeSkillAdapter(context: Context) : BaseRecycleAdapter<Skill>(context) {
         textViewSkillTitle.text = dataItem.skillTitle
         textViewSkillNote.text = dataItem.skillNote
         textViewSkillCategory.text = dataItem.skillCategory.categoryTitle
+
+        itemview.setOnClickListener {
+            listener?.onClickSkill(dataItem)
+        }
+    }
+
+    interface OnSkillClickListener {
+        fun onClickSkill(dataItem: Skill)
     }
 }

@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.data.db.AppDatabase
+import com.codewithk10.learnanything.data.db.entity.Skill
 import com.codewithk10.learnanything.ui.base.BaseFragment
 import com.codewithk10.learnanything.ui.dashboard.home.adapter.HomeSkillAdapter
 import com.codewithk10.learnanything.utils.itemdecorator.HomeSkillItemDecorator
+import com.codewithk10.learnanything.utils.notification.AppAlarmService
 import com.google.android.material.appbar.MaterialToolbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
 
     companion object {
         const val TAG = "HomeFragment"
@@ -75,6 +77,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setUpAdapter() {
         homeSkillAdapter = HomeSkillAdapter(requireContext())
+        homeSkillAdapter.listener = this
         recycleView.adapter = homeSkillAdapter
         recycleView.layoutManager = LinearLayoutManager(requireContext())
         recycleView.addItemDecoration(HomeSkillItemDecorator(requireContext()))
@@ -91,5 +94,11 @@ class HomeFragment : BaseFragment() {
     private fun setUpToolbar() {
         // TODO: 23/5/21 Set app user name
         textViewToolbarTitle.text = "Hi, Ketan"
+    }
+
+    override fun onClickSkill(dataItem: Skill) {
+        AppAlarmService(requireContext()).apply {
+            cancelScheduledAlarm(dataItem.skillNotification)
+        }
     }
 }

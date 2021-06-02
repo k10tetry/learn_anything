@@ -3,6 +3,7 @@ package com.codewithk10.learnanything.utils.notification
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import org.joda.time.DateTime
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -17,8 +18,18 @@ class AlarmReceiver : BroadcastReceiver() {
                 val notify = it.getParcelable<AppNotify>(EXTRA_NOTIFY_DATA)
                 notify?.let {
                     AppNotification.getInstance(context).createNotification(notify)
+                    reScheduleAlarm(context, notify)
                 }
             }
+        }
+    }
+
+    private fun reScheduleAlarm(context: Context, notify: AppNotify) {
+        val nextNotify = notify.copy(
+            notificationReminder = DateTime(notify.notificationReminder).plusDays(1).millis
+        )
+        AppAlarmService(context).apply {
+            createScheduledAlarm(nextNotify)
         }
     }
 }

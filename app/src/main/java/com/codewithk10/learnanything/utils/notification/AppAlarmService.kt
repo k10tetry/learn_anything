@@ -12,10 +12,9 @@ class AppAlarmService(private val context: Context) {
         val pendingIntent = createPendingIntent(notify)
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-        alarmManager?.setInexactRepeating(
+        alarmManager?.setExact(
             AlarmManager.RTC_WAKEUP,
             notify.notificationReminder,
-            AlarmManager.INTERVAL_HALF_DAY,
             pendingIntent
         )
     }
