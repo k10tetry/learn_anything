@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
                     homeSkillAdapter.dataItemList = ArrayList(it)
                 },
                 {
-                    log(it.message.toString() + "home")
+                    it.printStackTrace()
                 }
             )
     }

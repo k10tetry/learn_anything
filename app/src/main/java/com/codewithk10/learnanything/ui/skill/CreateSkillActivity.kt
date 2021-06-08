@@ -216,10 +216,7 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
                 DateTime.now().millis
             )
 
-        addSkillToRoom(skillObject)
-        AppAlarmService(this).apply {
-            createScheduledAlarm(skillNotify)
-        }
+        addSkillToRoom(skillObject, skillNotify)
     }
 
     private fun getNotificationReminderTime(): Long {
@@ -230,11 +227,14 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
         return notificationTime
     }
 
-    private fun addSkillToRoom(skillObject: Skill) {
+    private fun addSkillToRoom(skillObject: Skill, skillNotify: AppNotify) {
         AppDatabase.getDatabase(this).skillDao().addSkill(skillObject)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                AppAlarmService(this).apply {
+                    createScheduledAlarm(skillNotify)
+                }
                 finish()
             }, {
                 log(it.message.toString())
