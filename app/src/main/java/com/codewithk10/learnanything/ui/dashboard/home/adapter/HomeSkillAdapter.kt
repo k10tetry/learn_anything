@@ -34,9 +34,15 @@ class HomeSkillAdapter(context: Context) : BaseRecycleAdapter<Skill>(context) {
         itemview.setOnClickListener {
             listener?.onClickSkill(dataItem)
         }
+
+        itemview.setOnLongClickListener {
+            listener?.onLongClickSkill(dataItem)
+            true
+        }
     }
 
     interface OnSkillClickListener {
         fun onClickSkill(dataItem: Skill)
+        fun onLongClickSkill(dataItem: Skill)
     }
 }

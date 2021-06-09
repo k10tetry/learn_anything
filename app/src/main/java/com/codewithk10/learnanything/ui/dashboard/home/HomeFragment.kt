@@ -101,4 +101,15 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
             cancelScheduledAlarm(dataItem.skillNotification)
         }
     }
+
+    override fun onLongClickSkill(dataItem: Skill) {
+        AppDatabase.getDatabase(requireContext()).skillDao().deleteSkill(dataItem)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                onClickSkill(dataItem)
+            }, {
+                it.printStackTrace()
+            })
+    }
 }

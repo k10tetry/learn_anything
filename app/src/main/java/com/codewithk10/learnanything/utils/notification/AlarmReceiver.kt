@@ -10,6 +10,7 @@ class AlarmReceiver : BroadcastReceiver() {
     companion object {
         const val EXTRA_NOTIFY_DATA = "EXTRA_NOTIFY_DATA"
         const val EXTRA_NOTIFY_BUNDLE = "EXTRA_NOTIFY_BUNDLE"
+        const val NEXT_ALARM_IN_DAYS = 1
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -26,7 +27,9 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun reScheduleAlarm(context: Context, notify: AppNotify) {
         val nextNotify = notify.copy(
-            notificationReminder = DateTime(notify.notificationReminder).plusDays(1).millis
+            notificationReminder = DateTime(notify.notificationReminder).plusDays(
+                NEXT_ALARM_IN_DAYS
+            ).millis
         )
         AppAlarmService(context).apply {
             createScheduledAlarm(nextNotify)
