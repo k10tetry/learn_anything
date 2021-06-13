@@ -42,7 +42,8 @@ class AppNotification(private val context: Context) {
         val intent = DashboardActivity.getInstance(context).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val pendingIntent =
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification =
             NotificationCompat.Builder(context, AppNotificationChannel.REMINDER.channelId)
@@ -56,6 +57,25 @@ class AppNotification(private val context: Context) {
         val notificationManager =
             context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(notify.notificationId, notification)
+    }
+
+    fun getNotification(notify: AppNotify, displayTime: String): Notification {
+        val intent = DashboardActivity.getInstance(context).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent =
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return NotificationCompat.Builder(context, AppNotificationChannel.REMINDER.channelId)
+            .setContentTitle(notify.notificationTitle)
+            .setContentText(displayTime)
+            .setAutoCancel(true)
+            .setShowWhen(false)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setDefaults(Notification.DEFAULT_ALL)
+            .build()
     }
 
 }

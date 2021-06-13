@@ -1,5 +1,6 @@
 package com.codewithk10.learnanything.ui.dashboard.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.codewithk10.learnanything.data.db.AppDatabase
 import com.codewithk10.learnanything.data.db.entity.Skill
 import com.codewithk10.learnanything.ui.base.BaseFragment
 import com.codewithk10.learnanything.ui.dashboard.home.adapter.HomeSkillAdapter
+import com.codewithk10.learnanything.ui.service.TimerService
 import com.codewithk10.learnanything.utils.itemdecorator.HomeSkillItemDecorator
 import com.codewithk10.learnanything.utils.notification.AppAlarmService
 import com.google.android.material.appbar.MaterialToolbar
@@ -84,11 +86,16 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
     }
 
     private fun setUpListeners() {
-        imageViewPremium.setOnClickListener {
-        }
+        imageViewPremium.setOnClickListener(onClickPremium)
+        imageViewNotification.setOnClickListener(onClickNotification)
+    }
 
-        imageViewNotification.setOnClickListener {
-        }
+    private val onClickPremium: (View) -> Unit = {
+
+    }
+
+    private val onClickNotification: (View) -> Unit = {
+
     }
 
     private fun setUpToolbar() {
@@ -111,5 +118,11 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
             }, {
                 it.printStackTrace()
             })
+    }
+
+    override fun onStartSkill(dataItem: Skill) {
+        val intent = Intent(requireContext(), TimerService::class.java)
+        intent.putExtra(TimerService.EXTRA_APP_NOTIFY, dataItem.skillNotification)
+        requireContext().startService(intent)
     }
 }
