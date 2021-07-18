@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import com.codewithk10.learnanything.R
 
 abstract class BaseDialog : DialogFragment() {
 
@@ -34,15 +35,9 @@ abstract class BaseDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
-        val dialog = Dialog(requireContext())
-        val window = dialog.window
-        window?.requestFeature(Window.FEATURE_NO_TITLE)
-        window?.setBackgroundDrawableResource(android.R.color.transparent)
-        window?.setLayout(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.shape_white_round_rectangle)
         return dialog
     }
 

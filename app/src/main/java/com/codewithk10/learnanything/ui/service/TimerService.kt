@@ -20,6 +20,13 @@ class TimerService : Service() {
     }
 
     private lateinit var handler: Handler
+    private lateinit var notificationManager: NotificationManager
+
+    override fun onCreate() {
+        super.onCreate()
+        notificationManager =
+            getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
@@ -52,8 +59,6 @@ class TimerService : Service() {
     private fun createHandler(appNotify: AppNotify): Handler = Handler(mainLooper) {
         when (it.what) {
             TIMER_RUNNING -> {
-                val notificationManager =
-                    getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.notify(
                     appNotify.notificationId,
                     AppNotification.getInstance(this)
@@ -81,7 +86,7 @@ class TimerService : Service() {
         )
     }
 
-    internal class TimeCounter(
+    inner class TimeCounter(
         private val handler: Handler,
         millisInFuture: Long,
         countDownInterval: Long
@@ -89,14 +94,14 @@ class TimerService : Service() {
         CountDownTimer(millisInFuture, countDownInterval) {
 
         override fun onTick(p0: Long) {
-            val message = Message()
+            val message = Message.obtain()
             message.arg1 = p0.div(1000).toInt()
             message.what = TIMER_RUNNING
             handler.sendMessage(message)
         }
 
         override fun onFinish() {
-            val message = Message()
+            val message = Message.obtain()
             message.what = TIMER_FINISHED
             handler.sendMessage(message)
         }
