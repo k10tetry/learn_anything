@@ -1,9 +1,11 @@
 package com.codewithk10.learnanything.ui.dashboard.statistics
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.databinding.FragmentStatisticsBinding
 import com.codewithk10.learnanything.ui.base.BaseFragment
 
 class StatisticsFragment : BaseFragment() {
@@ -22,11 +24,14 @@ class StatisticsFragment : BaseFragment() {
         }
     }
 
-    override fun setLayout(): Int {
-        return R.layout.fragment_statistics
+    private lateinit var binding: FragmentStatisticsBinding
+
+    override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
+        binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun init(view: View) {
+    override fun init() {
     }
 
     override fun setUp() {

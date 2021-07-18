@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
@@ -17,12 +16,12 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(setLayout(), container, false)
+        return setLayout(inflater, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
         setUp()
     }
 
@@ -41,8 +40,7 @@ abstract class BaseFragment : Fragment() {
         baseActivity?.toast(message)
     }
 
-    @LayoutRes
-    abstract fun setLayout(): Int
-    abstract fun init(view: View)
+    abstract fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View
+    abstract fun init()
     abstract fun setUp()
 }

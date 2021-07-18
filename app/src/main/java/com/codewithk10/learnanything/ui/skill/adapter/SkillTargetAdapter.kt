@@ -2,6 +2,7 @@ package com.codewithk10.learnanything.ui.skill.adapter
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RadioButton
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.ui.base.BaseRecycleAdapter
@@ -13,8 +14,8 @@ class SkillTargetAdapter(context: Context) : BaseRecycleAdapter<TargetData>(cont
     var listener: OnTargetSelectedListener? = null
     var selectedTarget: TargetData? = null
 
-    override fun setItemView(): Int {
-        return R.layout.itemview_target
+    override fun setItemView(parent: ViewGroup): ViewGroup {
+        return R.layout.item_target
     }
 
     override fun initView(view: View) {

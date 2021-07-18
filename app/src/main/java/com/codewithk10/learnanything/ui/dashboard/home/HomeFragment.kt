@@ -2,15 +2,17 @@ package com.codewithk10.learnanything.ui.dashboard.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.data.db.AppDatabase
 import com.codewithk10.learnanything.data.db.entity.Skill
+import com.codewithk10.learnanything.databinding.FragmentHomeBinding
 import com.codewithk10.learnanything.ui.base.BaseFragment
 import com.codewithk10.learnanything.ui.dashboard.home.adapter.HomeSkillAdapter
 import com.codewithk10.learnanything.ui.service.TimerService
@@ -42,17 +44,19 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
     private lateinit var recycleView: RecyclerView
     private lateinit var materialToolbar: MaterialToolbar
     private lateinit var homeSkillAdapter: HomeSkillAdapter
+    private lateinit var binding: FragmentHomeBinding
 
-    override fun setLayout(): Int {
-        return R.layout.fragment_home
+    override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun init(view: View) {
-        recycleView = view.findViewById(R.id.rv_home_skill)
-        materialToolbar = view.findViewById(R.id.toolbar)
-        textViewToolbarTitle = view.findViewById(R.id.tv_toolbar_title)
-        imageViewPremium = view.findViewById(R.id.iv_toolbar_premium)
-        imageViewNotification = view.findViewById(R.id.iv_toolbar_notification)
+    override fun init() {
+        recycleView = binding.recycleHomeSkill
+        materialToolbar = binding.includeToolbar.toolbar
+        textViewToolbarTitle = binding.includeToolbar.textToolbarTitle
+        imageViewPremium = binding.includeToolbar.imageToolbarPremium
+        imageViewNotification = binding.includeToolbar.imageToolbarNotification
 
         setUpListeners()
     }

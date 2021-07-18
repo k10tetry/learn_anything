@@ -1,9 +1,11 @@
 package com.codewithk10.learnanything.ui.dashboard.record
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.databinding.FragmentRecordBinding
 import com.codewithk10.learnanything.ui.base.BaseFragment
 
 class RecordFragment : BaseFragment() {
@@ -22,11 +24,14 @@ class RecordFragment : BaseFragment() {
         }
     }
 
-    override fun setLayout(): Int {
-        return R.layout.fragment_record
+    private lateinit var binding: FragmentRecordBinding
+
+    override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
+        binding = FragmentRecordBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun init(view: View) {
+    override fun init() {
     }
 
     override fun setUp() {

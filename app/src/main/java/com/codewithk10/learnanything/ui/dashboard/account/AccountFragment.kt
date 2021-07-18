@@ -1,9 +1,11 @@
 package com.codewithk10.learnanything.ui.dashboard.account
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.databinding.FragmentAccountBinding
 import com.codewithk10.learnanything.ui.base.BaseFragment
 
 class AccountFragment : BaseFragment() {
@@ -22,14 +24,13 @@ class AccountFragment : BaseFragment() {
         }
     }
 
-    override fun setLayout(): Int {
-        return R.layout.fragment_account
+    private lateinit var fragmentAccountBinding: FragmentAccountBinding
+
+    override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
+        fragmentAccountBinding = FragmentAccountBinding.inflate(inflater, container, false)
+        return fragmentAccountBinding.root
     }
 
-    override fun init(view: View) {
-    }
-
-    override fun setUp() {
-
+    override fun init() {
     }
 }

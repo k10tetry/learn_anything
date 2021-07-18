@@ -2,9 +2,9 @@ package com.codewithk10.learnanything.ui.base
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.codewithk10.learnanything.R
@@ -22,8 +22,7 @@ abstract class BaseActivity : AppCompatActivity() {
         init()
     }
 
-    @LayoutRes
-    abstract fun setLayout(): Int
+    abstract fun setLayout(): View
     abstract fun init()
 
     fun log(message: String) {

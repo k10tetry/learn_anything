@@ -111,7 +111,7 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     private fun initView() {
         recycleView = findViewById(R.id.rv_create_skill)
         materialToolbar = findViewById(R.id.toolbar)
-        textViewToolbarTitle = findViewById(R.id.tv_toolbar_title)
+        textViewToolbarTitle = findViewById(R.id.text_toolbar_title)
         imageViewBack = findViewById(R.id.iv_toolbar_back)
         imageViewSave = findViewById(R.id.iv_toolbar_action)
 

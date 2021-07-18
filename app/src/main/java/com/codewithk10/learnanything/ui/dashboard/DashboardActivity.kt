@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.codewithk10.bottomnavigationindicator.BottomNavigationIndicator
 import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.databinding.ActivityDashboardBinding
 import com.codewithk10.learnanything.ui.base.BaseActivity
 import com.codewithk10.learnanything.ui.dashboard.account.AccountFragment
 import com.codewithk10.learnanything.ui.dashboard.home.HomeFragment
@@ -34,9 +36,11 @@ class DashboardActivity : BaseActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var bottomViewSelectionBar: BottomNavigationIndicator
     private lateinit var floatingActionButton: FloatingActionButton
+    private lateinit var activityDashboardBinding: ActivityDashboardBinding
 
-    override fun setLayout(): Int {
-        return R.layout.activity_dashboard
+    override fun setLayout(): View {
+        activityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
+        return activityDashboardBinding.root
     }
 
     override fun init() {
@@ -45,9 +49,9 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun initView() {
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomViewSelectionBar = findViewById(R.id.bottom_navigation_indicator)
-        floatingActionButton = findViewById(R.id.fab_dashboard)
+        bottomNavigationView = activityDashboardBinding.bottomNavigationView
+        bottomViewSelectionBar = activityDashboardBinding.bottomNavigationIndicator
+        floatingActionButton = activityDashboardBinding.fabDashboard
         initListener()
     }
 
@@ -88,7 +92,7 @@ class DashboardActivity : BaseActivity() {
 
     private fun openFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_container, fragment, tag)
+            replace(R.id.frame_container, fragment, tag)
             disallowAddToBackStack()
             commit()
         }

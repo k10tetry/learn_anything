@@ -18,7 +18,7 @@ class HomeSkillAdapter(context: Context) : BaseRecycleAdapter<Skill>(context) {
     var listener: OnSkillClickListener? = null
 
     override fun setItemView(): Int {
-        return R.layout.itemview_skill
+        return R.layout.item_skill
     }
 
     override fun initView(view: View) {

@@ -2,6 +2,7 @@ package com.codewithk10.learnanything.ui.skill.adapter
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.codewithk10.learnanything.R
@@ -18,8 +19,8 @@ class SkillCategoryAdapter(context: Context) :
     var selectedCategory: CategoryData? = null
     var listener: OnCategorySelectedListener? = null
 
-    override fun setItemView(): Int {
-        return R.layout.itemview_category
+    override fun setItemView(parent: ViewGroup): ViewGroup {
+        return R.layout.item_category
     }
 
     override fun initView(view: View) {

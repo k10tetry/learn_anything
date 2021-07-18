@@ -18,14 +18,14 @@
             app:titleTextAppearance="@style/AppTheme.TextStyle.Title">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_toolbar_user"
+                android:id="@+id/image_toolbar_user"
                 android:layout_width="@dimen/_42"
                 android:layout_height="@dimen/_42"
                 android:layout_gravity="start"
                 android:src="@drawable/unsplash_1" />
 
             <TextView
-                android:id="@+id/tv_toolbar_title"
+                android:id="@+id/text_toolbar_title"
                 style="@style/AppTheme.TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:text="Hi, Max" />
 
             <ImageView
-                android:id="@+id/iv_toolbar_notification"
+                android:id="@+id/image_toolbar_notification"
                 android:layout_width="@dimen/_42"
                 android:layout_height="@dimen/_42"
                 android:layout_gravity="end"
@@ -43,7 +43,7 @@
                 android:src="@drawable/ic_notification" />
 
             <ImageView
-                android:id="@+id/iv_toolbar_premium"
+                android:id="@+id/image_toolbar_premium"
                 android:layout_width="@dimen/_42"
                 android:layout_height="@dimen/_42"
                 android:layout_gravity="end"
