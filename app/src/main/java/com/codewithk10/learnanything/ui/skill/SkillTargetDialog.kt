@@ -1,10 +1,12 @@
 package com.codewithk10.learnanything.ui.skill
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.codewithk10.learnanything.R
+import com.codewithk10.learnanything.databinding.DialogSkillTargetBinding
 import com.codewithk10.learnanything.ui.base.BaseDialog
 import com.codewithk10.learnanything.ui.skill.adapter.SkillTargetAdapter
 import com.codewithk10.learnanything.ui.skill.data.TargetData
@@ -19,13 +21,15 @@ class SkillTargetDialog(private val selectedTarget: TargetData) : BaseDialog(),
     private lateinit var recycleView: RecyclerView
     private lateinit var skillTargetAdapter: SkillTargetAdapter
     private var createSkillActivity: CreateSkillActivity? = null
+    private lateinit var binding: DialogSkillTargetBinding
 
-    override fun setLayout(): Int {
-        return R.layout.dialog_skill_target
+    override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
+        binding = DialogSkillTargetBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun initView(view: View) {
-        recycleView = view.findViewById(R.id.rv_skill_target)
+        recycleView = binding.rvSkillTarget
     }
 
     override fun init() {

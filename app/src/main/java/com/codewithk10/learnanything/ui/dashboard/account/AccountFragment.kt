@@ -33,4 +33,8 @@ class AccountFragment : BaseFragment() {
 
     override fun init() {
     }
+
+    override fun setUp() {
+
+    }
 }

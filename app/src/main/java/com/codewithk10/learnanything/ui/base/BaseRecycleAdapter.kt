@@ -1,16 +1,13 @@
 package com.codewithk10.learnanything.ui.base
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecycleAdapter<T>(private val context: Context) :
-    RecyclerView.Adapter<BaseViewHolder>(), BaseRecycleAdapterListener<T> {
+    RecyclerView.Adapter<BaseViewHolder<T>>() {
 
-    @LayoutRes
-    abstract fun setItemView(): Int
+    abstract fun getViewHolder(parent: ViewGroup): BaseViewHolder<T>
 
     var dataItemList = ArrayList<T>()
         set(value) {
@@ -18,13 +15,12 @@ abstract class BaseRecycleAdapter<T>(private val context: Context) :
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return BaseViewHolder(LayoutInflater.from(context).inflate(setItemView(), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
+        return getViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        initView(holder.itemView)
-        initDataItem(dataItemList[position])
+    override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
+        holder.onBind(dataItemList[position])
     }
 
     override fun getItemCount(): Int {

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codewithk10.learnanything.R
 import com.codewithk10.learnanything.data.db.AppDatabase
 import com.codewithk10.learnanything.data.db.entity.Skill
+import com.codewithk10.learnanything.databinding.ActivityCreateSkillBinding
+import com.codewithk10.learnanything.databinding.ToolbarCustomBinding
 import com.codewithk10.learnanything.ui.base.BaseActivity
 import com.codewithk10.learnanything.ui.skill.adapter.SkillCategoryAdapter
 import com.codewithk10.learnanything.ui.skill.data.CategoryData
@@ -65,9 +68,13 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     private lateinit var selectedNotificationTime: LocalTime
     private var selectedCategory: CategoryData = CategoryData.CAREER
     private var selectedTarget: TargetData = TargetData.TWENTY_ONE
+    private lateinit var binding: ActivityCreateSkillBinding
+    private lateinit var toolbarBinding: ToolbarCustomBinding
 
-    override fun setLayout(): Int {
-        return R.layout.activity_create_skill
+    override fun setLayout(): View {
+        binding = ActivityCreateSkillBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarCustomBinding.bind(binding.root)
+        return binding.root
     }
 
     override fun init() {
@@ -109,17 +116,17 @@ class CreateSkillActivity : BaseActivity(), SkillCategoryAdapter.OnCategorySelec
     }
 
     private fun initView() {
-        recycleView = findViewById(R.id.rv_create_skill)
-        materialToolbar = findViewById(R.id.toolbar)
-        textViewToolbarTitle = findViewById(R.id.text_toolbar_title)
-        imageViewBack = findViewById(R.id.iv_toolbar_back)
-        imageViewSave = findViewById(R.id.iv_toolbar_action)
+        recycleView = binding.rvCreateSkill
+        materialToolbar = toolbarBinding.toolbar
+        textViewToolbarTitle = toolbarBinding.textToolbarTitle
+        imageViewBack = toolbarBinding.ivToolbarBack
+        imageViewSave = toolbarBinding.ivToolbarAction
 
-        editTextTitle = findViewById(R.id.edt_skill_title)
-        editTextNote = findViewById(R.id.edt_skill_note)
-        textViewReminder = findViewById(R.id.tv_skill_reminder)
-        textViewSound = findViewById(R.id.tv_skill_sound)
-        textViewTarget = findViewById(R.id.tv_skill_target)
+        editTextTitle = binding.edtSkillTitle
+        editTextNote = binding.edtSkillNote
+        textViewReminder = binding.tvSkillReminder
+        textViewSound = binding.tvSkillSound
+        textViewTarget = binding.tvSkillTarget
 
         setUpToolbar()
         setUpListeners()

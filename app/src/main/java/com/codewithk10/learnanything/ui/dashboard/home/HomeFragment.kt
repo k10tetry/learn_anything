@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codewithk10.learnanything.data.db.AppDatabase
 import com.codewithk10.learnanything.data.db.entity.Skill
 import com.codewithk10.learnanything.databinding.FragmentHomeBinding
+import com.codewithk10.learnanything.databinding.ToolbarHomeBinding
 import com.codewithk10.learnanything.ui.base.BaseFragment
 import com.codewithk10.learnanything.ui.dashboard.home.adapter.HomeSkillAdapter
 import com.codewithk10.learnanything.ui.service.TimerService
 import com.codewithk10.learnanything.utils.itemdecorator.HomeSkillItemDecorator
-import com.codewithk10.learnanything.utils.notification.AppAlarmService
 import com.google.android.material.appbar.MaterialToolbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -45,18 +45,20 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
     private lateinit var materialToolbar: MaterialToolbar
     private lateinit var homeSkillAdapter: HomeSkillAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var toolbarBinding: ToolbarHomeBinding
 
     override fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        toolbarBinding = ToolbarHomeBinding.bind(binding.root)
         return binding.root
     }
 
     override fun init() {
         recycleView = binding.recycleHomeSkill
-        materialToolbar = binding.includeToolbar.toolbar
-        textViewToolbarTitle = binding.includeToolbar.textToolbarTitle
-        imageViewPremium = binding.includeToolbar.imageToolbarPremium
-        imageViewNotification = binding.includeToolbar.imageToolbarNotification
+        materialToolbar = toolbarBinding.toolbar
+        textViewToolbarTitle = toolbarBinding.textToolbarTitle
+        imageViewPremium = toolbarBinding.imageToolbarPremium
+        imageViewNotification = toolbarBinding.imageToolbarNotification
 
         setUpListeners()
     }
@@ -108,9 +110,9 @@ class HomeFragment : BaseFragment(), HomeSkillAdapter.OnSkillClickListener {
     }
 
     override fun onClickSkill(dataItem: Skill) {
-        AppAlarmService(requireContext()).apply {
-            cancelScheduledAlarm(dataItem.skillNotification)
-        }
+//        AppAlarmService(requireContext()).apply {
+//            cancelScheduledAlarm(dataItem.skillNotification)
+//        }
     }
 
     override fun onLongClickSkill(dataItem: Skill) {

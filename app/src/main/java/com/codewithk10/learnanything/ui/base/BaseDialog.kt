@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.codewithk10.learnanything.R
 
 abstract class BaseDialog : DialogFragment() {
 
-    @LayoutRes
-    abstract fun setLayout(): Int
+    abstract fun setLayout(inflater: LayoutInflater, container: ViewGroup?): View
     abstract fun initView(view: View)
     abstract fun init()
 
@@ -23,9 +21,7 @@ abstract class BaseDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(
-            setLayout(), container, false
-        )
+        return setLayout(inflater, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
